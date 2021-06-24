@@ -50,7 +50,7 @@ def _proxies_random():
 	
 	return proxies
 
-def _check(nickname):
+def _check(request, nickname):
 	global hits
 
 	for i in range(0, 3):
@@ -121,8 +121,10 @@ def thread_starter(nickname_file, threads_amount):
 
 	hits = 0
 	ctypes.windll.kernel32.SetConsoleTitleW(f"{title} Hits: {hits}")	
+
+	request = cloudscraper.create_scraper()
 	for nickname in to_check:
-		thread = threading.Thread(target=_check, args=(nickname,))
+		thread = threading.Thread(target=_check, args=(request, nickname))
 		thread.start()
 
 		if threading.active_count() == threads_amount:
