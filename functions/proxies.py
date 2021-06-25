@@ -4,7 +4,7 @@ import time
 
 def proxies_scraper():
 	while True:
-		response = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=10000&country=all&ssl=all&anonymity=elite&simplified=true")
+		response = requests.get("https://api.proxyscrape.com/v2/?request=getproxies&protocol=http&timeout=5000&country=all&ssl=all&anonymity=elite&simplified=true")
 		with open("proxies.txt", "wb") as file:
 			file.write(response.content)
 		
