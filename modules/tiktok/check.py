@@ -28,9 +28,11 @@ def check(use_proxies, proxies_file, username):
 				hits += 1
 				title(f"Checking - Hits: {hits}")	
 				
-				if not os.path.isfile("hits.txt"):
-					open("hits.txt", "w")
-				with open("hits.txt", "a") as file:
+				if not os.path.exists(f"results/TikTok"):
+					os.makedirs(f"results/TikTok")
+				if not os.path.isfile("results/TikTok/hits.txt"):
+					open("results/TikTok/hits.txt", "w")
+				with open("results/TikTok/hits.txt", "a") as file:
 					file.write(f"{username}\n")
 				
 				print(f"{Fore.LIGHTGREEN_EX}[Hit] {username}")
