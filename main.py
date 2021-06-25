@@ -1,7 +1,7 @@
 import os
+from colorama import Fore, init
 from functions.utilities import title, logo
 from modules.playstation.init import playstation
-from colorama import Fore, init
 
 init(autoreset=True)
 os.system("mode con: cols=138 lines=30")

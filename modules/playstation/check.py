@@ -1,10 +1,9 @@
 import cloudscraper
 import threading
 import os
-import time
+from colorama import Fore, init
 from functions.utilities import title, logo
 from functions.proxies import proxies_scraper, proxies_random
-from colorama import Fore, init
 
 init(autoreset=True)
 

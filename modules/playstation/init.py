@@ -1,7 +1,7 @@
 import time
+from colorama import Fore, init
 from functions.utilities import title, logo
 from modules.playstation.check import starter
-from colorama import Fore, init
 
 init(autoreset=True)
 
