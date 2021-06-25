@@ -23,7 +23,7 @@ def check(proxies_file, username):
 				locker.acquire()
 				if response.status_code == 201:
 					hits += 1
-					title(f"Hits: {hits}")	
+					title(f"Checking - Hits: {hits}")	
 					
 					if not os.path.isfile("hits.txt"):
 						open("hits.txt", "w")
@@ -52,7 +52,7 @@ def starter(usernames_file, own_proxies, proxies_file, threads_amount):
 		threading.Thread(target=proxies_scraper).start()
 
 	hits = 0
-	title(f"Hits: {hits}")
+	title(f"Checking - Hits: {hits}")
 
 	for username in to_check:
 		thread = threading.Thread(target=check, args=(proxies_file, username))
