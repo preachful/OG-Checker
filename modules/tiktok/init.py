@@ -1,12 +1,12 @@
 import time
 from colorama import Fore, init
 from functions.utilities import title, logo
-from modules.playstation.check import starter
+from modules.tiktok.check import starter
 
 init(autoreset=True)
 
-def playstation():
-	title("Playstation - Initialization")
+def tiktok():
+	title("TikTok - Initialization")
 
 	logo()
 	print(f"{Fore.LIGHTMAGENTA_EX}Enter file where usernames to check are located. (with .txt)")

@@ -1,6 +1,6 @@
-import cloudscraper
 import threading
 import os
+import requests
 from colorama import Fore, init
 from functions.utilities import title, logo
 from functions.proxies import proxies_scraper, proxies_random
@@ -8,7 +8,6 @@ from functions.proxies import proxies_scraper, proxies_random
 init(autoreset=True)
 
 locker = threading.Lock()
-request = cloudscraper.create_scraper()
 
 def check(use_proxies, proxies_file, username):
 	global hits
@@ -23,28 +22,22 @@ def check(use_proxies, proxies_file, username):
 					"http": None,
 					"https": None
 				}
-			response = request.post("https://accounts.api.playstation.com/api/v1/accounts/onlineIds", json={"onlineId": username, "reserveIfAvailable": False}, proxies=proxy)
-			if response.status_code != 403:
-				locker.acquire()
-				if response.status_code == 201:
-					hits += 1
-					title(f"Checking - Hits: {hits}")	
-					
-					if not os.path.isfile("hits.txt"):
-						open("hits.txt", "w")
-					with open("hits.txt", "a") as file:
-						file.write(f"{username}\n")
-					
-					print(f"{Fore.LIGHTGREEN_EX}[Hit] {username}")
-				else:
-					print(f"{Fore.LIGHTRED_EX}[Bad] {username}")
-				locker.release()
-				break
+			response = requests.head(f"https://www.tiktok.com/@{username}", proxies=proxy)
+			locker.acquire()
+			if response.status_code == 200:
+				hits += 1
+				title(f"Checking - Hits: {hits}")	
+				
+				if not os.path.isfile("hits.txt"):
+					open("hits.txt", "w")
+				with open("hits.txt", "a") as file:
+					file.write(f"{username}\n")
+				
+				print(f"{Fore.LIGHTGREEN_EX}[Hit] {username}")
 			else:
-				retry += 1
-				locker.acquire()
-				print(f"{Fore.LIGHTRED_EX}[Proxy Blacklisted] {username} - {proxy['http']}")
-				locker.release()
+				print(f"{Fore.LIGHTRED_EX}[Bad] {username}")
+			locker.release()
+			break
 		except:
 			pass
 
